@@ -43,7 +43,9 @@ func Conflict(w http.ResponseWriter, errors []string) error {
 }
 
 func Created(w http.ResponseWriter, at string, data interface{}) error {
-	w.Header().Add("Location", at)
+	if at != "" {
+	  w.Header().Add("Location", at)
+	}
 
 	return Send(w, http.StatusCreated, Model{Message: "entity created", Data: data})
 }
